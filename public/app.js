@@ -28,4 +28,4 @@ $('#add').onclick=()=>openEditor();$('#today').onclick=()=>{state.date=new Date(
 document.querySelectorAll('footer [data-view]').forEach(b=>b.onclick=()=>{state.all=b.dataset.view==='all';document.querySelectorAll('footer [data-view]').forEach(x=>x.classList.toggle('active',x===b));render()});
 document.querySelectorAll('[data-person]').forEach(b=>b.onclick=()=>{localStorage.plannerUser=b.dataset.person;state.user=b.dataset.person;start()});
 async function start(){if(!state.user)return;document.body.dataset.user=state.user;document.querySelector('meta[name="theme-color"]').content=state.user==='vanya'?'#63b795':'#f486a8';$('#chooser').hidden=true;$('#app').hidden=false;state.events=await all('events');render();await sync();client.channel('planner-live').on('postgres_changes',{event:'*',schema:'public',table:'planner_events'},sync).subscribe();window.addEventListener('online',sync);navigator.storage?.persist?.().catch(()=>{})}
-if('serviceWorker'in navigator)navigator.serviceWorker.register('/sw.js');start();
+if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js');start();
