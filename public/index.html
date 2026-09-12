@@ -6,13 +6,13 @@
   <meta name="theme-color" content="#f486a8">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Вместе">
+  <meta name="apple-mobile-web-app-title" content="Планер">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./icon.svg">
   <link rel="apple-touch-icon" href="./icon.svg">
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./enhancements.css">
-  <title>Вместе</title>
+  <title>Планер</title>
 </head>
 <body>
   <section id="chooser">
@@ -28,7 +28,8 @@
 
   <main id="app" hidden>
     <header><div><p id="hello" class="eyebrow"></p><h1 id="dateTitle"></h1></div><button id="today" class="round" aria-label="Сегодня">⌁</button></header>
-    <nav id="days"></nav>
+    <section class="weekbar"><button id="prevWeek" aria-label="Предыдущая неделя">‹</button><div><strong id="weekRange"></strong><span>Неделя</span></div><button id="nextWeek" aria-label="Следующая неделя">›</button></section>
+    <nav id="days" aria-label="Дни недели"></nav>
     <div id="offline" hidden>Офлайн · изменения сохранятся</div>
     <div id="spaces"></div>
     <button id="add" aria-label="Добавить">＋</button>
@@ -47,6 +48,16 @@
       <label>Заметка <span class="optional">необязательно</span><textarea id="notes" maxlength="600" placeholder="Адрес, детали или идея…"></textarea></label>
       <div class="actions secondaryActions"><button id="copy" type="button" hidden>Копировать</button><button id="delete" type="button" hidden>Удалить</button></div>
       <div class="actions mainActions"><button id="cancelEditor" type="button">Отмена</button><button type="submit" class="primary">Сохранить</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="login">
+    <form id="loginForm">
+      <i class="handle"></i>
+      <div class="sheet"><div><p class="formEyebrow">Личный доступ</p><h2 id="loginTitle">Вход</h2></div><button id="closeLogin" type="button" class="close" aria-label="Закрыть">×</button></div>
+      <label>PIN-код<input id="pin" type="password" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" autocomplete="current-password" required placeholder="8 цифр"></label>
+      <p id="loginError" class="loginError" hidden></p>
+      <div class="actions mainActions"><button id="cancelLogin" type="button">Отмена</button><button type="submit" class="primary">Войти</button></div>
     </form>
   </dialog>
 

@@ -1,6 +1,8 @@
 [hidden]{display:none!important}
 body[data-user="vanya"]{--pink:#63b795;--deep:#26785b;--pale:#dff5ea;background:radial-gradient(circle at 80% 0,#d7f3e6 0,transparent 36%),#f7fcf9}
 body[data-user="vanya"] dialog{background:#f7fcf9}
+.people button[data-person="vanya"] span{border-radius:16px;background:#dff5ea;color:#26785b}
+.weekbar{display:grid;grid-template-columns:46px 1fr 46px;align-items:center;margin:-4px 0 10px;padding:6px;background:#ffffffb8;border-radius:18px;box-shadow:0 7px 22px #7432480c}.weekbar button{height:38px;border:0;background:transparent;border-radius:12px;color:var(--deep);font-size:28px}.weekbar div{text-align:center}.weekbar strong,.weekbar span{display:block}.weekbar strong{font-size:14px}.weekbar span{margin-top:1px;color:#9a7b87;font-size:10px;text-transform:uppercase;letter-spacing:.12em}#days{overflow:hidden;scroll-behavior:smooth;touch-action:pan-y}.day{transition:transform .18s ease,opacity .18s ease,background .18s ease}.week-moving{opacity:.35;transform:translateX(var(--slide,0))}
 .formEyebrow{margin:0 0 3px;color:var(--deep);font-size:11px;font-weight:750;letter-spacing:.12em;text-transform:uppercase}
 .titleLabel input{font-size:17px;padding:15px}
 .optional{font-weight:500;color:#a98b96}
@@ -8,4 +10,6 @@ body[data-user="vanya"] dialog{background:#f7fcf9}
 .durationPresets button{border:1px solid #efd6df;border-radius:12px;background:#fff;padding:9px 4px;color:#765662;font-size:12px}
 .durationPresets button.active{border-color:var(--pink);background:var(--pale);color:var(--deep);font-weight:750}
 .secondaryActions{margin-top:8px}.secondaryActions:empty{display:none}.mainActions{margin-top:12px}.mainActions #cancelEditor{min-width:92px}.mainActions .primary{font-size:16px;font-weight:750}
+.loginError{margin:8px 0;color:#b33358;font-size:13px;font-weight:650}
+html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
 @media(max-width:390px){.durationPresets{grid-template-columns:repeat(2,1fr)}.row{grid-template-columns:1fr 105px}}
