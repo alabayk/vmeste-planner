@@ -11,5 +11,5 @@ body[data-user="vanya"] dialog{background:#f7fcf9}
 .durationPresets button.active{border-color:var(--pink);background:var(--pale);color:var(--deep);font-weight:750}
 .secondaryActions{margin-top:8px}.secondaryActions:empty{display:none}.mainActions{margin-top:12px}.mainActions #cancelEditor{min-width:92px}.mainActions .primary{font-size:16px;font-weight:750}
 .loginError{margin:8px 0;color:#b33358;font-size:13px;font-weight:650}
-html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+html,body{scroll-behavior:smooth;-webkit-overflow-scrolling:touch;overflow-y:auto;overscroll-behavior-y:auto}main{touch-action:pan-y;min-height:100dvh}
 @media(max-width:390px){.durationPresets{grid-template-columns:repeat(2,1fr)}.row{grid-template-columns:1fr 105px}}
