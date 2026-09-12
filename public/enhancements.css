@@ -1,0 +1,11 @@
+[hidden]{display:none!important}
+body[data-user="vanya"]{--pink:#63b795;--deep:#26785b;--pale:#dff5ea;background:radial-gradient(circle at 80% 0,#d7f3e6 0,transparent 36%),#f7fcf9}
+body[data-user="vanya"] dialog{background:#f7fcf9}
+.formEyebrow{margin:0 0 3px;color:var(--deep);font-size:11px;font-weight:750;letter-spacing:.12em;text-transform:uppercase}
+.titleLabel input{font-size:17px;padding:15px}
+.optional{font-weight:500;color:#a98b96}
+.durationPresets{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:-2px 0 14px}
+.durationPresets button{border:1px solid #efd6df;border-radius:12px;background:#fff;padding:9px 4px;color:#765662;font-size:12px}
+.durationPresets button.active{border-color:var(--pink);background:var(--pale);color:var(--deep);font-weight:750}
+.secondaryActions{margin-top:8px}.secondaryActions:empty{display:none}.mainActions{margin-top:12px}.mainActions #cancelEditor{min-width:92px}.mainActions .primary{font-size:16px;font-weight:750}
+@media(max-width:390px){.durationPresets{grid-template-columns:repeat(2,1fr)}.row{grid-template-columns:1fr 105px}}
