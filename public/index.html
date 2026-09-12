@@ -11,7 +11,7 @@
   <link rel="icon" href="./icon.svg?v=11">
   <link rel="apple-touch-icon" href="./icon.svg?v=11">
   <link rel="stylesheet" href="./styles.css?v=11">
-  <link rel="stylesheet" href="./enhancements.css?v=12">
+  <link rel="stylesheet" href="./enhancements.css?v=13">
   <title>Планер</title>
 </head>
 <body>
@@ -30,10 +30,11 @@
     <header><div><p id="hello" class="eyebrow"></p><h1 id="dateTitle"></h1></div><button id="today" class="round" aria-label="Сегодня">⌁</button></header>
     <section class="weekbar"><button id="prevWeek" aria-label="Предыдущая неделя">‹</button><div><strong id="weekRange"></strong><span>Неделя</span></div><button id="nextWeek" aria-label="Следующая неделя">›</button></section>
     <nav id="days" aria-label="Дни недели"></nav>
+    <nav id="allDates" aria-label="Даты всех планов" hidden></nav>
     <div id="offline" hidden>Офлайн · изменения сохранятся</div>
     <div id="spaces"></div>
     <button id="add" aria-label="Добавить">＋</button>
-    <footer><button class="active" data-view="day">Сегодня</button><button data-view="all">Все планы</button><button id="switch">Сменить</button></footer>
+    <footer><button class="active" data-view="day"><i>⌾</i><span>Сегодня</span></button><button data-view="all"><i>≡</i><span>Все планы</span></button><button id="switch"><i>↗</i><span>Выйти</span></button></footer>
   </main>
 
   <dialog id="editor">
@@ -63,6 +64,6 @@
 
   <template id="card"><article><button class="check" aria-label="Готово"></button><div class="cardBody"><time></time><h3></h3><p></p></div><button class="more" aria-label="Действия">•••</button></article></template>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script type="module" src="./app.js?v=12"></script>
+  <script type="module" src="./app.js?v=13"></script>
 </body>
 </html>
