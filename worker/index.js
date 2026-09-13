@@ -18,12 +18,13 @@ async function currentUser(request, env) {
   return response.ok ? response.json() : null;
 }
 
-async function db(env, path, init = {}) {
+async function db(request, env, path, init = {}) {
+  const authorization = request.headers.get("Authorization") || "";
   return fetch(`${env.SUPABASE_URL}/rest/v1/${path}`, {
     ...init,
     headers: {
-      apikey: env.SUPABASE_SERVICE_ROLE_KEY,
-      authorization: `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}`,
+      apikey: env.SUPABASE_PUBLISHABLE_KEY,
+      authorization,
       "content-type": "application/json",
       ...(init.headers || {}),
     },
@@ -42,7 +43,7 @@ export default {
       if (body.action === "subscribe") {
         const subscription = body.subscription;
         if (!subscription?.endpoint) return json({ error: "Invalid subscription" }, 400);
-        const response = await db(env, "push_subscriptions?on_conflict=endpoint", {
+        const response = await db(request, env, "push_subscriptions?on_conflict=endpoint", {
           method: "POST",
           headers: { Prefer: "resolution=merge-duplicates" },
           body: JSON.stringify({
@@ -57,7 +58,7 @@ export default {
       }
 
       if (body.action === "notify") {
-        const response = await db(env, `push_subscriptions?select=endpoint,subscription&user_id=neq.${encodeURIComponent(user.id)}`);
+        const response = await db(request, env, "rpc/get_other_push_subscriptions", { method: "POST", body: "{}" });
         if (!response.ok) throw new Error(await response.text());
         const rows = await response.json();
         webpush.setVapidDetails("mailto:ivan.dremach07@yandex.ru", env.VAPID_PUBLIC_KEY, env.VAPID_PRIVATE_KEY);
