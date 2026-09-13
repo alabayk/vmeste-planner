@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "vmeste-planner-push",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-13",
+  "vars": {
+    "SUPABASE_URL": "https://6651c19e846b7d7ec63055a91999001f.supa.tatnet.cloud",
+    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_AUwkIutAMM4DVknnLQodsCU5lA4w",
+    "VAPID_PUBLIC_KEY": "BIRw6lIGR66-gsM1iUuQ_dUksYr9yxgWnRacgpBoJUWoF1ApSC18RzzKnqTxu_I6JU3XJ3clVUttorMTkHM4kEE"
+  }
+}
