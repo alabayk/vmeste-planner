@@ -11,7 +11,7 @@
   <link rel="icon" href="./icon.svg?v=11">
   <link rel="apple-touch-icon" href="./icon.svg?v=11">
   <link rel="stylesheet" href="./styles.css?v=11">
-  <link rel="stylesheet" href="./enhancements.css?v=21">
+  <link rel="stylesheet" href="./enhancements.css?v=22">
   <title>Планер</title>
 </head>
 <body>
@@ -43,14 +43,16 @@
       <div class="sheet"><div><p class="formEyebrow">Быстро и понятно</p><h2 id="formTitle">Новый план</h2></div><button id="closeEditor" type="button" class="close" aria-label="Закрыть">×</button></div>
       <input type="hidden" id="eventId">
       <label class="titleLabel">Что планируем?<input id="title" maxlength="120" required autocomplete="off" placeholder="Например, прогулка"></label>
-      <div class="row"><label>Когда<input id="startsAt" type="datetime-local" required></label><label>Минут<input id="duration" type="number" min="5" max="1440" step="5" value="30" required inputmode="numeric"></label></div>
-      <div class="durationPresets" aria-label="Быстрая длительность"><button type="button" data-duration="30">30 мин</button><button type="button" data-duration="60">1 час</button><button type="button" data-duration="90">1,5 часа</button><button type="button" data-duration="120">2 часа</button></div>
+      <div class="row eventTimes"><label>Начало<input id="startsAt" type="datetime-local" required></label><label>Конец<input id="endsAt" type="datetime-local" required></label></div>
       <label>Куда сохранить<select id="space"></select></label>
-      <label>Заметка <span class="optional">необязательно</span><textarea id="notes" maxlength="600" placeholder="Адрес, детали или идея…"></textarea></label>
+      <label>Заметка о событии <span class="optional">необязательно</span><textarea id="notes" maxlength="600" placeholder="Адрес, детали или идея…"></textarea></label>
       <div class="actions secondaryActions"><button id="copy" type="button" hidden>Копировать</button><button id="delete" type="button" hidden>Удалить</button></div>
       <div class="actions mainActions"><button id="cancelEditor" type="button">Отмена</button><button type="submit" class="primary">Сохранить</button></div>
     </form>
   </dialog>
+
+  <dialog id="addChooser"><form><i class="handle"></i><div class="sheet"><h2>Что добавить?</h2><button id="closeAddChooser" type="button" class="close">×</button></div><div class="addKinds"><button id="addEventKind" type="button"><b>Событие</b><span>Начало, конец и календарь</span></button><button id="addDeadlineKind" type="button"><b>Дедлайн</b><span>Срок и напоминание</span></button></div></form></dialog>
+  <dialog id="deadlineStub"><form><i class="handle"></i><div class="sheet"><h2>Дедлайн</h2><button id="closeDeadline" type="button" class="close">×</button></div><div class="deadlineEmpty"></div></form></dialog>
 
   <dialog id="login">
     <form id="loginForm">
@@ -73,6 +75,6 @@
 
   <template id="card"><article><button class="check" aria-label="Готово"></button><div class="cardBody"><time></time><h3></h3><p></p></div><button class="more" aria-label="Действия">•••</button></article></template>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script type="module" src="./app.js?v=21"></script>
+  <script type="module" src="./app.js?v=22"></script>
 </body>
 </html>
