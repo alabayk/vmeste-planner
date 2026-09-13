@@ -65,7 +65,10 @@ export default {
         webpush.setVapidDetails("mailto:ivan.dremach07@yandex.ru", env.VAPID_PUBLIC_KEY, env.VAPID_PRIVATE_KEY);
         const payload = JSON.stringify({ title: "Новый общий план", body: body.title, url: "/vmeste-planner/" });
         const results = await Promise.allSettled(rows.map(({ subscription }) => webpush.sendNotification(subscription, payload)));
-        return json({ ok: true, sent: results.filter((result) => result.status === "fulfilled").length });
+        const sent = results.filter((result) => result.status === "fulfilled").length;
+        const failed = results.filter((result) => result.status === "rejected").map((result) => String(result.reason?.message || result.reason));
+        console.log(JSON.stringify({ event: "push-delivery", subscriptions: rows.length, sent, failed }));
+        return json({ ok: failed.length === 0, subscriptions: rows.length, sent, failed });
       }
 
       return json({ error: "Bad request" }, 400);
