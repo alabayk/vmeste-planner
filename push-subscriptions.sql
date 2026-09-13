@@ -28,3 +28,18 @@ $$;
 
 revoke all on function public.get_other_push_subscriptions() from public, anon;
 grant execute on function public.get_other_push_subscriptions() to authenticated;
+
+create table if not exists public.push_jobs (
+  id uuid primary key default gen_random_uuid(),
+  created_by uuid not null references auth.users(id) on delete cascade default auth.uid(),
+  target_user_id uuid references auth.users(id) on delete cascade,
+  title text not null,
+  created_at timestamptz not null default now(),
+  processed_at timestamptz
+);
+alter table public.push_jobs enable row level security;
+revoke all on public.push_jobs from anon;
+grant insert on public.push_jobs to authenticated;
+drop policy if exists "users create push jobs" on public.push_jobs;
+create policy "users create push jobs" on public.push_jobs
+for insert to authenticated with check (created_by = auth.uid());

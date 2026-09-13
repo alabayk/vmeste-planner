@@ -31,6 +31,35 @@ async function db(request, env, path, init = {}) {
   });
 }
 
+async function adminDb(env, path, init = {}) {
+  return fetch(`${env.SUPABASE_URL}/rest/v1/${path}`, {
+    ...init,
+    headers: {
+      apikey: env.SUPABASE_SERVICE_ROLE_KEY,
+      authorization: `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}`,
+      "content-type": "application/json",
+      ...(init.headers || {}),
+    },
+  });
+}
+
+async function deliverQueue(env) {
+  if (!env.SUPABASE_SERVICE_ROLE_KEY) throw new Error("SUPABASE_SERVICE_ROLE_KEY is missing");
+  const jobsResponse = await adminDb(env, "push_jobs?select=id,created_by,target_user_id,title&processed_at=is.null&order=created_at.asc&limit=20");
+  if (!jobsResponse.ok) throw new Error(await jobsResponse.text());
+  const jobs = await jobsResponse.json();
+  webpush.setVapidDetails("mailto:ivan.dremach07@yandex.ru", env.VAPID_PUBLIC_KEY, env.VAPID_PRIVATE_KEY);
+  for (const job of jobs) {
+    const filter = job.target_user_id ? `user_id=eq.${job.target_user_id}` : `user_id=neq.${job.created_by}`;
+    const subscriptionsResponse = await adminDb(env, `push_subscriptions?select=subscription&${filter}`);
+    const subscriptions = subscriptionsResponse.ok ? await subscriptionsResponse.json() : [];
+    const payload = JSON.stringify({ title: job.target_user_id ? "Планер" : "Новый общий план", body: job.target_user_id ? "Уведомления работают" : job.title, url: "/vmeste-planner/" });
+    const results = await Promise.allSettled(subscriptions.map(({ subscription }) => webpush.sendNotification(subscription, payload)));
+    await adminDb(env, `push_jobs?id=eq.${job.id}`, { method: "PATCH", body: JSON.stringify({ processed_at: new Date().toISOString() }) });
+    console.log(JSON.stringify({ event: "queued-push", job: job.id, subscriptions: subscriptions.length, sent: results.filter(r => r.status === "fulfilled").length, failed: results.filter(r => r.status === "rejected").map(r => String(r.reason?.message || r.reason)) }));
+  }
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return new Response(null, { headers: cors });
@@ -79,5 +108,8 @@ export default {
     } catch (error) {
       return json({ error: String(error?.message || error) }, 500);
     }
+  },
+  async scheduled(_controller, env, ctx) {
+    ctx.waitUntil(deliverQueue(env));
   },
 };
