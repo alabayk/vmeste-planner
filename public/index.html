@@ -11,7 +11,7 @@
   <link rel="icon" href="./icon.svg?v=11">
   <link rel="apple-touch-icon" href="./icon.svg?v=11">
   <link rel="stylesheet" href="./styles.css?v=11">
-  <link rel="stylesheet" href="./enhancements.css?v=22">
+  <link rel="stylesheet" href="./enhancements.css?v=24">
   <title>Планер</title>
 </head>
 <body>
@@ -52,7 +52,7 @@
   </dialog>
 
   <dialog id="addChooser"><form><i class="handle"></i><div class="sheet"><h2>Что добавить?</h2><button id="closeAddChooser" type="button" class="close">×</button></div><div class="addKinds"><button id="addEventKind" type="button"><b>Событие</b><span>Начало, конец и календарь</span></button><button id="addDeadlineKind" type="button"><b>Дедлайн</b><span>Срок и напоминание</span></button></div></form></dialog>
-  <dialog id="deadlineStub"><form><i class="handle"></i><div class="sheet"><h2>Дедлайн</h2><button id="closeDeadline" type="button" class="close">×</button></div><div class="deadlineEmpty"></div></form></dialog>
+  <dialog id="deadlineStub"><form id="deadlineForm"><i class="handle"></i><div class="sheet"><div><p class="formEyebrow">Не забыть важное</p><h2 id="deadlineFormTitle">Новый дедлайн</h2></div><button id="closeDeadline" type="button" class="close">×</button></div><input id="deadlineId" type="hidden"><label>Что нужно сделать?<input id="deadlineTitle" maxlength="120" required autocomplete="off" placeholder="Например, сдать проект"></label><label>Срок<input id="deadlineAt" type="datetime-local" required></label><label>Для кого<select id="deadlineOwner"><option value="personal">Для меня</option><option value="shared">Для нас двоих</option></select></label><label>Напомнить<select id="deadlineReminder"><option value="15">За 15 минут</option><option value="60">За час</option><option value="1440">За день</option><option value="0">Не напоминать</option></select></label><label>Заметка <span class="optional">необязательно</span><textarea id="deadlineNotes" maxlength="400" placeholder="Детали дедлайна…"></textarea></label><div class="actions secondaryActions"><button id="deleteDeadline" type="button" hidden>Удалить</button></div><div class="actions mainActions"><button id="cancelDeadline" type="button">Отмена</button><button type="submit" class="primary">Сохранить</button></div></form></dialog>
 
   <dialog id="login">
     <form id="loginForm">
@@ -75,6 +75,6 @@
 
   <template id="card"><article><button class="check" aria-label="Готово"></button><div class="cardBody"><time></time><h3></h3><p></p></div><button class="more" aria-label="Действия">•••</button></article></template>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script type="module" src="./app.js?v=23"></script>
+  <script type="module" src="./app.js?v=24"></script>
 </body>
 </html>
