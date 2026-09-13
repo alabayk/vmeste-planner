@@ -58,12 +58,16 @@ export default {
         return json({ ok: true });
       }
 
-      if (body.action === "notify") {
-        const response = await db(request, env, "rpc/get_other_push_subscriptions", { method: "POST", body: "{}" });
+      if (body.action === "notify" || body.action === "test") {
+        const response = body.action === "test"
+          ? await db(request, env, `push_subscriptions?select=endpoint,subscription&user_id=eq.${encodeURIComponent(user.id)}`)
+          : await db(request, env, "rpc/get_other_push_subscriptions", { method: "POST", body: "{}" });
         if (!response.ok) throw new Error(await response.text());
         const rows = await response.json();
         webpush.setVapidDetails("mailto:ivan.dremach07@yandex.ru", env.VAPID_PUBLIC_KEY, env.VAPID_PRIVATE_KEY);
-        const payload = JSON.stringify({ title: "Новый общий план", body: body.title, url: "/vmeste-planner/" });
+        const payload = JSON.stringify(body.action === "test"
+          ? { title: "Планер", body: "Уведомления работают", url: "/vmeste-planner/" }
+          : { title: "Новый общий план", body: body.title, url: "/vmeste-planner/" });
         const results = await Promise.allSettled(rows.map(({ subscription }) => webpush.sendNotification(subscription, payload)));
         const sent = results.filter((result) => result.status === "fulfilled").length;
         const failed = results.filter((result) => result.status === "rejected").map((result) => String(result.reason?.message || result.reason));
