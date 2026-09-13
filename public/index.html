@@ -11,7 +11,7 @@
   <link rel="icon" href="./icon.svg?v=11">
   <link rel="apple-touch-icon" href="./icon.svg?v=11">
   <link rel="stylesheet" href="./styles.css?v=11">
-  <link rel="stylesheet" href="./enhancements.css?v=25">
+  <link rel="stylesheet" href="./enhancements.css?v=26">
   <title>Планер</title>
 </head>
 <body>
@@ -44,7 +44,7 @@
       <input type="hidden" id="eventId">
       <label class="titleLabel">Что планируем?<input id="title" maxlength="120" required autocomplete="off" placeholder="Например, прогулка"></label>
       <div class="row eventTimes"><label>Начало<input id="startsAt" type="datetime-local" required></label><label>Конец<input id="endsAt" type="datetime-local" required></label></div>
-      <label>Куда сохранить<select id="space"></select></label>
+      <label class="calendarField">Календарь<select id="space"></select><small>Общий календарь виден вам обоим</small></label>
       <label>Заметка о событии <span class="optional">необязательно</span><textarea id="notes" maxlength="600" placeholder="Адрес, детали или идея…"></textarea></label>
       <div class="actions secondaryActions"><button id="copy" type="button" hidden>Копировать</button><button id="delete" type="button" hidden>Удалить</button></div>
       <div class="actions mainActions"><button id="cancelEditor" type="button">Отмена</button><button type="submit" class="primary">Сохранить</button></div>
@@ -75,6 +75,6 @@
 
   <template id="card"><article><button class="check" aria-label="Готово"></button><div class="cardBody"><time></time><h3></h3><p></p></div><button class="more" aria-label="Действия">•••</button></article></template>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script type="module" src="./app.js?v=35"></script>
+  <script type="module" src="./app.js?v=36"></script>
 </body>
 </html>

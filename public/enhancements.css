@@ -37,6 +37,7 @@ html,body{overflow-y:visible}body{overflow-x:hidden}#allDates{top:env(safe-area-
 
 /* Grid/form corrections */
 #editor .row{display:grid;grid-template-columns:minmax(0,1fr);gap:0}#editor .row label{width:100%;min-width:0}#editor input[type="datetime-local"],#editor input[type="number"]{width:100%;max-width:100%}
+#editor .eventTimes{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}#editor .eventTimes input{min-width:0;width:100%;padding:11px 8px;font-size:13px;letter-spacing:-.02em}.calendarField small{display:block;margin:7px 2px 0;color:#a0848e;font-size:11px;font-weight:500}.calendarField select{font-weight:700}@media(max-width:370px){#editor .eventTimes{grid-template-columns:minmax(0,1fr)}#editor .eventTimes input{font-size:16px;padding:12px}}
 .sharedCalendar .calendarHeads{display:none}.sharedCalendar .dayGrid{height:896px;margin-top:8px}.sharedCalendar .eventColumns{background:repeating-linear-gradient(to bottom,#d2c3c8 0 1px,transparent 1px 56px),repeating-linear-gradient(to bottom,transparent 0 27px,#e2d7db 27px 28px,transparent 28px 56px),repeating-linear-gradient(to bottom,transparent 0 13px,#eee7e9 13px 14px,transparent 14px 28px),linear-gradient(90deg,#fff0f5 0 50%,#f0fbf6 50%)}
 
 /* Simple offline-synced tasks */
