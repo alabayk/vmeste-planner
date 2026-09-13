@@ -37,9 +37,16 @@ create table if not exists public.push_jobs (
   created_at timestamptz not null default now(),
   processed_at timestamptz
 );
+alter table public.push_jobs add column if not exists event_id uuid;
+alter table public.push_jobs add column if not exists audience text not null default 'other';
+alter table public.push_jobs add column if not exists kind text not null default 'shared';
+alter table public.push_jobs add column if not exists deliver_at timestamptz not null default now();
+create unique index if not exists push_jobs_event_audience_idx on public.push_jobs(event_id, audience);
 alter table public.push_jobs enable row level security;
 revoke all on public.push_jobs from anon;
-grant insert on public.push_jobs to authenticated;
+grant select, insert, update, delete on public.push_jobs to authenticated;
 drop policy if exists "users create push jobs" on public.push_jobs;
 create policy "users create push jobs" on public.push_jobs
-for insert to authenticated with check (created_by = auth.uid());
+for all to authenticated
+using (created_by = auth.uid())
+with check (created_by = auth.uid());

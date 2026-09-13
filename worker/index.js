@@ -45,15 +45,15 @@ async function adminDb(env, path, init = {}) {
 
 async function deliverQueue(env) {
   if (!env.SUPABASE_SERVICE_ROLE_KEY) throw new Error("SUPABASE_SERVICE_ROLE_KEY is missing");
-  const jobsResponse = await adminDb(env, "push_jobs?select=id,created_by,target_user_id,title&processed_at=is.null&order=created_at.asc&limit=20");
+  const jobsResponse = await adminDb(env, `push_jobs?select=id,created_by,target_user_id,title,audience,kind&processed_at=is.null&deliver_at=lte.${encodeURIComponent(new Date().toISOString())}&order=deliver_at.asc&limit=20`);
   if (!jobsResponse.ok) throw new Error(await jobsResponse.text());
   const jobs = await jobsResponse.json();
   webpush.setVapidDetails("mailto:ivan.dremach07@yandex.ru", env.VAPID_PUBLIC_KEY, env.VAPID_PRIVATE_KEY);
   for (const job of jobs) {
-    const filter = job.target_user_id ? `user_id=eq.${job.target_user_id}` : `user_id=neq.${job.created_by}`;
-    const subscriptionsResponse = await adminDb(env, `push_subscriptions?select=subscription&${filter}`);
+    const filter = job.target_user_id ? `user_id=eq.${job.target_user_id}` : job.audience === "all" ? "" : job.audience === "self" ? `user_id=eq.${job.created_by}` : `user_id=neq.${job.created_by}`;
+    const subscriptionsResponse = await adminDb(env, `push_subscriptions?select=subscription${filter?'&'+filter:''}`);
     const subscriptions = subscriptionsResponse.ok ? await subscriptionsResponse.json() : [];
-    const payload = JSON.stringify({ title: job.target_user_id ? "Планер" : "Новый общий план", body: job.target_user_id ? "Уведомления работают" : job.title, url: "/vmeste-planner/" });
+    const payload = JSON.stringify({ title: job.kind === "test" ? "Планер" : job.kind === "deadline" ? "Дедлайн" : "Новый общий план", body: job.kind === "test" ? "Уведомления работают" : job.title, url: "/vmeste-planner/" });
     const results = await Promise.allSettled(subscriptions.map(({ subscription }) => webpush.sendNotification(subscription, payload)));
     await adminDb(env, `push_jobs?id=eq.${job.id}`, { method: "PATCH", body: JSON.stringify({ processed_at: new Date().toISOString() }) });
     console.log(JSON.stringify({ event: "queued-push", job: job.id, subscriptions: subscriptions.length, sent: results.filter(r => r.status === "fulfilled").length, failed: results.filter(r => r.status === "rejected").map(r => String(r.reason?.message || r.reason)) }));
