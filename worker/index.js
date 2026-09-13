@@ -34,6 +34,7 @@ async function db(request, env, path, init = {}) {
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return new Response(null, { headers: cors });
+    if (request.method === "GET") return json({ ok: true, vapidConfigured: Boolean(env.VAPID_PRIVATE_KEY) });
     if (request.method !== "POST") return json({ error: "Method not allowed" }, 405);
     try {
       const user = await currentUser(request, env);
