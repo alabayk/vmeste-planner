@@ -48,7 +48,7 @@ async function deliverQueue(env) {
   const jobsResponse = await adminDb(env, `push_jobs?select=id,created_by,target_user_id,title,audience,kind&processed_at=is.null&deliver_at=lte.${encodeURIComponent(new Date().toISOString())}&order=deliver_at.asc&limit=20`);
   if (!jobsResponse.ok) throw new Error(await jobsResponse.text());
   const jobs = await jobsResponse.json();
-  webpush.setVapidDetails("mailto:ivan.dremach07@yandex.ru", env.VAPID_PUBLIC_KEY, env.VAPID_PRIVATE_KEY);
+  webpush.setVapidDetails("mailto:noreply@planer.app", env.VAPID_PUBLIC_KEY, env.VAPID_PRIVATE_KEY);
   for (const job of jobs) {
     const audience = job.audience.replace(/_(due|soon)$/, "");
     const filter = job.target_user_id ? `user_id=eq.${job.target_user_id}` : audience === "all" ? "" : audience === "self" ? `user_id=eq.${job.created_by}` : `user_id=neq.${job.created_by}`;
@@ -94,7 +94,7 @@ export default {
           : await db(request, env, "rpc/get_other_push_subscriptions", { method: "POST", body: "{}" });
         if (!response.ok) throw new Error(await response.text());
         const rows = await response.json();
-        webpush.setVapidDetails("mailto:ivan.dremach07@yandex.ru", env.VAPID_PUBLIC_KEY, env.VAPID_PRIVATE_KEY);
+      webpush.setVapidDetails("mailto:noreply@planer.app", env.VAPID_PUBLIC_KEY, env.VAPID_PRIVATE_KEY);
         const payload = JSON.stringify(body.action === "test"
           ? { title: "Планер", body: "Уведомления работают", url: "/vmeste-planner/" }
           : { title: "Новый общий план", body: body.title, url: "/vmeste-planner/" });

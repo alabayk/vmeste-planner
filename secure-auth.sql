@@ -1,4 +1,4 @@
--- Run once after creating vanya@planer.app and ksusha@planer.app in Supabase Auth.
+-- Run once after creating both application accounts in Supabase Auth.
 drop policy if exists planner_read on public.planner_events;
 drop policy if exists planner_add on public.planner_events;
 drop policy if exists planner_change on public.planner_events;
