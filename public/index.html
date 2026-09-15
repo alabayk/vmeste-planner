@@ -11,7 +11,7 @@
   <link rel="icon" href="./icon.svg?v=11">
   <link rel="apple-touch-icon" href="./icon.svg?v=11">
   <link rel="stylesheet" href="./styles.css?v=11">
-  <link rel="stylesheet" href="./enhancements.css?v=30">
+  <link rel="stylesheet" href="./enhancements.css?v=31">
   <title>Планер</title>
 </head>
 <body>
@@ -33,8 +33,9 @@
     <nav id="allDates" aria-label="Даты всех планов" hidden></nav>
     <div id="offline" hidden>Офлайн · изменения сохранятся</div>
     <div id="spaces"></div>
+    <p id="lastUpdated" class="lastUpdated"></p>
     <button id="add" aria-label="Добавить">＋</button>
-    <footer><button class="active" data-view="day"><i>⌾</i><span>Сегодня</span></button><button data-view="all"><i>≡</i><span>Все планы</span></button><button data-view="tasks"><i>✓</i><span>Дела</span></button></footer>
+    <footer><button class="active" data-view="day"><i>⌾</i><span>Календарь</span></button><button data-view="all"><i>≡</i><span>Все планы</span></button><button data-view="tasks"><i>✓</i><span>Дела</span></button></footer>
   </main>
 
   <dialog id="editor">
@@ -75,6 +76,6 @@
 
   <template id="card"><article><button class="check" aria-label="Готово"></button><div class="cardBody"><time></time><h3></h3><p></p></div><button class="more" aria-label="Действия">•••</button></article></template>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script type="module" src="./app.js?v=41"></script>
+  <script type="module" src="./app.js?v=42"></script>
 </body>
 </html>
