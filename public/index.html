@@ -11,7 +11,7 @@
   <link rel="icon" href="./icon.svg?v=11">
   <link rel="apple-touch-icon" href="./icon.svg?v=11">
   <link rel="stylesheet" href="./styles.css?v=11">
-  <link rel="stylesheet" href="./enhancements.css?v=32">
+  <link rel="stylesheet" href="./enhancements.css?v=33">
   <title>Планер</title>
 </head>
 <body>
@@ -27,7 +27,7 @@
   </section>
 
   <main id="app" hidden>
-    <header><div><p id="hello" class="eyebrow"></p><h1 id="dateTitle"></h1></div><button id="switch" class="round" aria-label="Выйти">↗</button></header>
+    <header><div><p id="hello" class="eyebrow"></p><button id="dateTitle" class="dateTitleButton" type="button" aria-label="Открыть календарь по месяцам"></button></div><button id="switch" class="round" aria-label="Выйти">↗</button></header>
     <section class="weekbar"><button id="prevWeek" aria-label="Предыдущая неделя">‹</button><div><strong id="weekRange"></strong><button id="todayButton" type="button">Сегодня</button></div><button id="nextWeek" aria-label="Следующая неделя">›</button></section>
     <nav id="days" aria-label="Дни недели"></nav>
     <nav id="allDates" aria-label="Даты всех планов" hidden></nav>
@@ -76,6 +76,6 @@
 
   <template id="card"><article><button class="check" aria-label="Готово"></button><div class="cardBody"><time></time><h3></h3><p></p></div><button class="more" aria-label="Действия">•••</button></article></template>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script type="module" src="./app.js?v=44"></script>
+  <script type="module" src="./app.js?v=45"></script>
 </body>
 </html>
