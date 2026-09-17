@@ -11,7 +11,7 @@
   <link rel="icon" href="./icon.svg?v=11">
   <link rel="apple-touch-icon" href="./icon.svg?v=11">
   <link rel="stylesheet" href="./styles.css?v=11">
-  <link rel="stylesheet" href="./enhancements.css?v=33">
+  <link rel="stylesheet" href="./enhancements.css?v=34">
   <title>Планер</title>
 </head>
 <body>
@@ -27,7 +27,7 @@
   </section>
 
   <main id="app" hidden>
-    <header><div><p id="hello" class="eyebrow"></p><button id="dateTitle" class="dateTitleButton" type="button" aria-label="Открыть календарь по месяцам"></button></div><button id="switch" class="round" aria-label="Выйти">↗</button></header>
+    <header><div><p id="hello" class="eyebrow"></p><button id="dateTitle" class="dateTitleButton" type="button" aria-label="Открыть календарь по месяцам"></button></div><button id="switch" class="round menuButton" aria-label="Открыть меню"><i></i><i></i><i></i></button></header>
     <section class="weekbar"><button id="prevWeek" aria-label="Предыдущая неделя">‹</button><div><strong id="weekRange"></strong><button id="todayButton" type="button">Сегодня</button></div><button id="nextWeek" aria-label="Следующая неделя">›</button></section>
     <nav id="days" aria-label="Дни недели"></nav>
     <nav id="allDates" aria-label="Даты всех планов" hidden></nav>
@@ -36,6 +36,7 @@
     <p id="lastUpdated" class="lastUpdated"></p>
     <button id="add" aria-label="Добавить">＋</button>
     <footer><button class="active" data-view="day"><i>⌾</i><span>Календарь</span></button><button data-view="all"><i>≡</i><span>Все планы</span></button><button data-view="tasks"><i>✓</i><span>Дела</span></button></footer>
+    <aside id="sideMenu" class="sideMenu" hidden><button id="menuBackdrop" class="menuBackdrop" aria-label="Закрыть меню"></button><section><div class="menuProfile"><span id="menuAvatar" class="menuAvatar">П</span><div><b>Профиль</b><small>Оформление приложения</small></div></div><button id="openProfile" class="menuItem"><span>Профиль</span><i>›</i></button><button id="logout" class="menuItem logout"><span>Выйти</span><i>↗</i></button></section></aside>
   </main>
 
   <dialog id="editor">
@@ -74,8 +75,10 @@
     </form>
   </dialog>
 
+  <dialog id="profileDialog" class="profileDialog"><form><i class="handle"></i><div class="sheet"><div><p class="formEyebrow">Настройки</p><h2>Профиль</h2></div><button id="closeProfile" type="button" class="close" aria-label="Закрыть">×</button></div><div class="profilePhoto"><span id="profileAvatar" class="profileAvatar">П</span><div><input id="profilePhotoInput" type="file" accept="image/jpeg,image/png,image/gif,image/webp" hidden><label for="profilePhotoInput" class="photoChoose">Изменить фото</label><button id="removeProfilePhoto" type="button">Удалить фото</button><small id="profilePhotoStatus">Фото обрезается и сжимается на устройстве</small></div></div><section class="passwordIdea"><b>Пароль</b><span>Изменение пароля появится здесь позже</span></section></form></dialog>
+
   <template id="card"><article><button class="check" aria-label="Готово"></button><div class="cardBody"><time></time><h3></h3><p></p></div><button class="more" aria-label="Действия">•••</button></article></template>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script type="module" src="./app.js?v=45"></script>
+  <script type="module" src="./app.js?v=46"></script>
 </body>
 </html>
