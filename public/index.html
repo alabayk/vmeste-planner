@@ -11,7 +11,7 @@
   <link rel="icon" href="./icon.svg?v=11">
   <link rel="apple-touch-icon" href="./icon.svg?v=11">
   <link rel="stylesheet" href="./styles.css?v=11">
-  <link rel="stylesheet" href="./enhancements.css?v=34">
+  <link rel="stylesheet" href="./enhancements.css?v=35">
   <title>Планер</title>
 </head>
 <body>
@@ -75,10 +75,10 @@
     </form>
   </dialog>
 
-  <dialog id="profileDialog" class="profileDialog"><form><i class="handle"></i><div class="sheet"><div><p class="formEyebrow">Настройки</p><h2>Профиль</h2></div><button id="closeProfile" type="button" class="close" aria-label="Закрыть">×</button></div><div class="profilePhoto"><span id="profileAvatar" class="profileAvatar">П</span><div><input id="profilePhotoInput" type="file" accept="image/jpeg,image/png,image/gif,image/webp" hidden><label for="profilePhotoInput" class="photoChoose">Изменить фото</label><button id="removeProfilePhoto" type="button">Удалить фото</button><small id="profilePhotoStatus">Фото обрезается и сжимается на устройстве</small></div></div><section class="passwordIdea"><b>Пароль</b><span>Изменение пароля появится здесь позже</span></section></form></dialog>
+  <dialog id="profileDialog" class="profileDialog"><form id="profileForm"><i class="handle"></i><div class="sheet"><div><p class="formEyebrow">Настройки</p><h2>Профиль</h2></div><button id="closeProfile" type="button" class="close" aria-label="Закрыть">×</button></div><div class="profilePhoto"><span id="profileAvatar" class="profileAvatar">П</span><div><input id="profilePhotoInput" type="file" accept="image/jpeg,image/png,image/gif,image/webp" hidden><label for="profilePhotoInput" class="photoChoose">Изменить фото</label><button id="removeProfilePhoto" type="button">Удалить фото</button><small id="profilePhotoStatus">Фото обрезается и сжимается на устройстве</small></div></div><section class="passwordSettings"><div><b>Сменить пароль</b><span>Не менее 6 символов</span></div><label>Текущий пароль<input id="currentPassword" type="password" minlength="6" autocomplete="current-password" required></label><label>Новый пароль<input id="newPassword" type="password" minlength="6" autocomplete="new-password" required></label><label>Повторите новый пароль<input id="confirmPassword" type="password" minlength="6" autocomplete="new-password" required></label><p id="passwordStatus" hidden></p><button id="changePassword" type="submit">Сохранить новый пароль</button></section></form></dialog>
 
   <template id="card"><article><button class="check" aria-label="Готово"></button><div class="cardBody"><time></time><h3></h3><p></p></div><button class="more" aria-label="Действия">•••</button></article></template>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script type="module" src="./app.js?v=46"></script>
+  <script type="module" src="./app.js?v=47"></script>
 </body>
 </html>
